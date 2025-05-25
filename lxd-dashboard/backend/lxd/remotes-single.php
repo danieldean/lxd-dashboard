@@ -87,7 +87,8 @@ if (isset($_SESSION['username'])) {
       $arr = array();
 
       //Instance Stats
-      $url = $base_url. "/1.0/instances?recursion=2&project=" . $project;
+      $type = "container";
+      $url = $base_url. "/1.0/instances?recursion=2&project=" . $project . "&filter=type+eq+" . $type;
       $instance_api_data = sendCurlRequest($action, "GET", $url);
       $instance_api_data = json_decode($instance_api_data, true);
       $instances = (isset($instance_api_data['metadata'])) ? $instance_api_data['metadata'] : [];
@@ -287,7 +288,8 @@ if (isset($_SESSION['username'])) {
       $arr = array();
 
       //Instance Stats
-      $url = $base_url. "/1.0/instances?recursion=2&project=" . $project;
+      $type = "virtual-machine";
+      $url = $base_url. "/1.0/instances?recursion=2&project=" . $project . "&filter=type+eq+" . $type;
       $instance_api_data = sendCurlRequest($action, "GET", $url);
       $instance_api_data = json_decode($instance_api_data, true);
       $instances = (isset($instance_api_data['metadata'])) ? $instance_api_data['metadata'] : [];

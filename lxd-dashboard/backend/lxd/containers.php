@@ -33,7 +33,8 @@ if (isset($_SESSION['username'])) {
   $name = (isset($_GET['name'])) ? filter_var(urldecode($_GET['name']), FILTER_SANITIZE_STRING) : "";
   $profile = (isset($_GET['profile'])) ? filter_var(urldecode($_GET['profile']), FILTER_SANITIZE_STRING) : "default";
   $fingerprint = (isset($_GET['fingerprint'])) ? filter_var(urldecode($_GET['fingerprint']), FILTER_SANITIZE_STRING) : "none";
-  $type = (isset($_GET['type'])) ? filter_var(urldecode($_GET['type']), FILTER_SANITIZE_STRING) : "";
+  //Always make sure the type is 'container'
+  $type = "container"; //(isset($_GET['type'])) ? filter_var(urldecode($_GET['type']), FILTER_SANITIZE_STRING) : "";
   $instance_type = (isset($_GET['instance_type'])) ? filter_var(urldecode($_GET['instance_type']), FILTER_SANITIZE_STRING) : "";
   $description = (isset($_GET['description'])) ? filter_var(urldecode($_GET['description']), FILTER_SANITIZE_STRING) : "";
   $public = (isset($_GET['public'])) ? filter_var(urldecode($_GET['public']), FILTER_SANITIZE_STRING) : "";
@@ -266,7 +267,7 @@ if (isset($_SESSION['username'])) {
       $instance_array['description'] = $description;
       $instance_array['profiles'] = array();
       array_push($instance_array['profiles'], $profile);
-      //$instance_array['type'] = $type;
+      $instance_array['type'] = $type;
       $instance_array['instance_type'] = $instance_type;
 
       if ($fingerprint == "none"){
@@ -365,7 +366,10 @@ if (isset($_SESSION['username'])) {
 
     case "createInstanceUsingJSON":
       $url = $base_url . "/1.0/instances?project=" . $project;
-      $data = $json;
+      //This could fail if JSON is invalid?
+      $instance_array = json_decode($json, true);
+      $instance_array['type'] = $type;
+      $data = json_encode($instance_array);
       $results = sendCurlRequest($action, "POST", $url, $data);
       echo $results;
 
@@ -567,7 +571,7 @@ if (isset($_SESSION['username'])) {
 
     case "listInstances":
       if (validateAuthorization($action)) {
-        $url = $base_url . "/1.0/instances?recursion=2&project=" . $project;
+        $url = $base_url . "/1.0/instances?recursion=2&project=" . $project . "&filter=type+eq+" . $type;
         $results = sendCurlRequest($action, "GET", $url);
         $results = json_decode($results, true);
         $instance_api_data = (isset($results['metadata'])) ? $results['metadata'] : [];
@@ -718,7 +722,7 @@ if (isset($_SESSION['username'])) {
       break;
 
     case "listInstancesForSelectOption":
-      $url = $base_url . "/1.0/instances?recursion=1&project=" . $project;
+      $url = $base_url . "/1.0/instances?recursion=1&project=" . $project . "&filter=type+eq+" . $type;
       $results = sendCurlRequest($action, "GET", $url);
       $results = json_decode($results, true);
       $instance_api_data = (isset($results['metadata'])) ? $results['metadata'] : [];
