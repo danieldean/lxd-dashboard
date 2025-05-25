@@ -327,43 +327,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     </div>
   </div>
 
-  <!-- Trademark Notices Modal-->
-  <div class="modal fade" id="trademarkNotices" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Trademark Notices</h5>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="row">
-            <div class="col-12">
-              <div>
-                The LXD Dashboard has made all efforts to keep within trademark usage guidlines when using the logos and names of Linux operating systems. Resources for acceptable use guidlines are provided below. The LXD Dashboard is not affliated with any of the Linux operating systems.
-                <ul>
-                  <li>Alpine is a trademark of Alpine Linux Development Team. Information on Alpine Linux trademark guidelines can be found here <a href="https://alpinelinux.org/" target="_blank">https://alpinelinux.org/</a></li>
-                  <li>Arch Linux is a registered trademark of Aaron Griffin and Judd Vinet, on behalf of Arch Linux. Information on Arch Linux trademark guidelines can be found here <a href="https://wiki.archlinux.org/title/DeveloperWiki:TrademarkPolicy" target="_blank">https://wiki.archlinux.org/title/DeveloperWiki:TrademarkPolicy</a></li>
-                  <li>CentOS is a trademarks of Red Hat, Inc. (“Red Hat”). Information on CentOS Linux trademark guidelines can be found here <a href="https://www.centos.org/legal/trademarks/" target="_blank">https://www.centos.org/legal/trademarks/</a></li>
-                  <li>Debian is a registered trademark owned by Software in the Public Interest, Inc. Information on Debian Linux trademark guidelines can be found here <a href="https://www.debian.org/trademark" target="_blank">https://www.debian.org/trademark</a></li>
-                  <li>Gentoo is a registered trademark of the Gentoo Foundation, Inc. Information on the Gentoo Linux trademark guidelines can be found here <a href="https://www.gentoo.org/inside-gentoo/foundation/name-logo-guidelines.html" target="_blank">https://www.gentoo.org/inside-gentoo/foundation/name-logo-guidelines.html</a></li>
-                  <li>Kali Linux is a registered trademark of Offensive Security. Information on Kali Linux trademark guidelines can be found here <a href="https://www.kali.org/docs/policy/trademark/" target="_blank">https://www.kali.org/docs/policy/trademark/</a></li>
-                  <li>OpenSUSE is a registered trademark of SUSE LLC. Information on the OpenSUSE trademark guidelines can be found here <a href="https://en.opensuse.org/openSUSE:Trademark_guidelines" target="_blank">https://en.opensuse.org/openSUSE:Trademark_guidelines</a></li>
-                  <li>OpenWrt trademark is a registered United States trademark of Software Freedom Conservancy (SFC). Information on OpenWrt trademark guidelines can be found here <a href="https://openwrt.org/trademark" target="blank">https://openwrt.org/trademark</a></li>
-                  <li>Ubuntu is a registered trademark of Canonical Ltd. Information on Ubuntu Linux trademark guidelines can be found here <a href="https://design.ubuntu.com/brand/ubuntu-logo/" target="_blank">https://design.ubuntu.com/brand/ubuntu-logo/</a></li>           
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Dismiss</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <!-- About Modal-->
   <div class="modal fade" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
