@@ -125,7 +125,7 @@ if (isset($_SESSION['username'])) {
   switch ($action) {
 
     case "attachInstanceProfile":
-      $url = $base_url . "/1.0/containers/" . $instance . "?project=" . $project;
+      $url = $base_url . "/1.0/instances/" . $instance . "?project=" . $project;
       $results = sendCurlRequest($action, "GET", $url);
       $data = json_decode($results, true);
       $description = $data['metadata']['description'];
@@ -148,14 +148,14 @@ if (isset($_SESSION['username'])) {
 
     case "copyInstance":
       //Copying on clustered hosts requires target location. Determine location of instance being copied.
-      $url = $base_url . "/1.0/containers/" . $instance . "?project=" . $project;
+      $url = $base_url . "/1.0/instances/" . $instance . "?project=" . $project;
       $instance_api_data = sendCurlRequest($action, "GET", $url);       
       $instance_api_data = json_decode($instance_api_data, true);
       $instance_data = $instance_api_data['metadata'];
       $location = $instance_data['location']; //Returns "none" for instances on non-clusted hosts
         
       //Set url with location variable
-      $url = $base_url . "/1.0/containers?target=" . $location . "&project=" . $project;
+      $url = $base_url . "/1.0/instances?target=" . $location . "&project=" . $project;
         
       //If creating a instance from snapshot, add snapshot to instance name and use instance_only for copy
       if(!empty($snapshot)){
@@ -201,7 +201,7 @@ if (isset($_SESSION['username'])) {
         default:
           $file_extension = ".tar";
       }
-      $url = $base_url . "/1.0/containers/" . $instance . "/backups?project=" . $project;
+      $url = $base_url . "/1.0/instances/" . $instance . "/backups?project=" . $project;
       $data = '{"name": "'. $name . $file_extension . '", "instance_only": '.$instance_only.', "optimized_storage": '.$optimized_storage.', "compression_algorithm": "'.$compression_algorithm.'"}';
       $results = sendCurlRequest($action, "POST", $url, $data);
       echo $results;
@@ -219,14 +219,14 @@ if (isset($_SESSION['username'])) {
 
     case "createInstanceFromSnapshot":
       //Copying on clustered hosts requires target location. Determine location of instance being copied.
-      $url = $base_url . "/1.0/containers/" . $instance . "?project=" . $project;
+      $url = $base_url . "/1.0/instances/" . $instance . "?project=" . $project;
       $instance_api_data = sendCurlRequest($action, "GET", $url);       
       $instance_api_data = json_decode($instance_api_data, true);
       $instance_data = $instance_api_data['metadata'];
       $location = $instance_data['location']; //Returns "none" for instances on non-clusted hosts
         
       //Set url with location variable
-      $url = $base_url . "/1.0/containers?target=" . $location . "&project=" . $project;
+      $url = $base_url . "/1.0/instances?target=" . $location . "&project=" . $project;
         
       //If creating a instance from snapshot, add snapshot to instance name and use instance_only for copy
       if(!empty($snapshot)){
@@ -254,10 +254,10 @@ if (isset($_SESSION['username'])) {
     case "createInstanceUsingForm":
       //If location == none let LXD determine where the container is created        
       if ($location == "none"){
-        $url = $base_url . "/1.0/containers?project=" . $project; 
+        $url = $base_url . "/1.0/instances?project=" . $project; 
       }
       else {
-        $url = $base_url . "/1.0/containers?target=" . $location . "&project=" . $project;
+        $url = $base_url . "/1.0/instances?target=" . $location . "&project=" . $project;
       }
 
       $instance_array = array();
@@ -364,7 +364,7 @@ if (isset($_SESSION['username'])) {
       break;
 
     case "createInstanceUsingJSON":
-      $url = $base_url . "/1.0/containers?project=" . $project;
+      $url = $base_url . "/1.0/instances?project=" . $project;
       $data = $json;
       $results = sendCurlRequest($action, "POST", $url, $data);
       echo $results;
@@ -381,7 +381,7 @@ if (isset($_SESSION['username'])) {
       break;
 
     case "deleteInstance":  
-      $url = $base_url . "/1.0/containers/" . $instance . "?project=" . $project;
+      $url = $base_url . "/1.0/instances/" . $instance . "?project=" . $project;
       $results = sendCurlRequest($action, "DELETE", $url);
       echo $results;
 
@@ -400,7 +400,7 @@ if (isset($_SESSION['username'])) {
       $hostname = retrieveHostName($remote); 
       $file = '/var/lxdware/backups/' . $hostname . '/' . $project . '/' . $instance . '/' . $name;
       unlink($file);
-      $url = $base_url . "/1.0/containers/" . $instance . "/backups/" . $name . "?project=" . $project;
+      $url = $base_url . "/1.0/instances/" . $instance . "/backups/" . $name . "?project=" . $project;
       $results = sendCurlRequest($action, "DELETE", $url);
       echo $results;
 
@@ -432,7 +432,7 @@ if (isset($_SESSION['username'])) {
       break;
 
     case "deleteInstanceSnapshot":
-      $url = $base_url . "/1.0/containers/" . $instance . "/snapshots/" . $name . "?project=" . $project;
+      $url = $base_url . "/1.0/instances/" . $instance . "/snapshots/" . $name . "?project=" . $project;
       $results = sendCurlRequest($action, "DELETE", $url);
       echo $results;
 
@@ -448,7 +448,7 @@ if (isset($_SESSION['username'])) {
       break;
 
     case "detachInstanceProfile":
-      $url = $base_url . "/1.0/containers/" . $instance . "?project=" . $project;
+      $url = $base_url . "/1.0/instances/" . $instance . "?project=" . $project;
       $results = sendCurlRequest($action, "GET", $url);
       $data = json_decode($results, true);
       $description = $data['metadata']['description'];
@@ -523,7 +523,7 @@ if (isset($_SESSION['username'])) {
             mkdir('/var/lxdware/backups/'.$hostname . '/' . $project . '/' . $instance, 0777, true);
           }
           
-          $url = $base_url . "/1.0/containers/" . $instance . "/backups/" . $name . "/export?project=" . $project;
+          $url = $base_url . "/1.0/instances/" . $instance . "/backups/" . $name . "/export?project=" . $project;
 
           //Calling a script to execute the export. This will run in a seperate process so that it doesn't block other PHP requests from completing
           $results = exec("php ./scripts/curl-export-file.php $file $url $cert $key > /dev/null &");
@@ -549,7 +549,7 @@ if (isset($_SESSION['username'])) {
       break;
 
     case "freezeInstance":
-      $url = $base_url . "/1.0/containers/" . $instance . "/state?project=" . $project;
+      $url = $base_url . "/1.0/instances/" . $instance . "/state?project=" . $project;
       $data = '{"action": "freeze"}';
       $results = sendCurlRequest($action, "PUT", $url, $data);
       echo $results;
@@ -567,7 +567,7 @@ if (isset($_SESSION['username'])) {
 
     case "listInstances":
       if (validateAuthorization($action)) {
-        $url = $base_url . "/1.0/containers?recursion=2&project=" . $project;
+        $url = $base_url . "/1.0/instances?recursion=2&project=" . $project;
         $results = sendCurlRequest($action, "GET", $url);
         $results = json_decode($results, true);
         $instance_api_data = (isset($results['metadata'])) ? $results['metadata'] : [];
@@ -718,7 +718,7 @@ if (isset($_SESSION['username'])) {
       break;
 
     case "listInstancesForSelectOption":
-      $url = $base_url . "/1.0/containers?recursion=1&project=" . $project;
+      $url = $base_url . "/1.0/instances?recursion=1&project=" . $project;
       $results = sendCurlRequest($action, "GET", $url);
       $results = json_decode($results, true);
       $instance_api_data = (isset($results['metadata'])) ? $results['metadata'] : [];
@@ -734,7 +734,7 @@ if (isset($_SESSION['username'])) {
       break;
 
     case "loadInstanceInformation":
-      $url = $base_url . "/1.0/containers/" . $instance . "?project=" . $project;
+      $url = $base_url . "/1.0/instances/" . $instance . "?project=" . $project;
       $results = sendCurlRequest($action, "GET", $url);
       echo $results;
       break;
@@ -746,7 +746,7 @@ if (isset($_SESSION['username'])) {
       break;
 
     case "migrateInstance":
-      $url = $base_url . "/1.0/containers/" . $instance . "?target=" . $location . "&project=" . $project;
+      $url = $base_url . "/1.0/instances/" . $instance . "?target=" . $location . "&project=" . $project;
       $data = '{"name": "'. $instance . '", "migration": true, "live": false}';
       $results = sendCurlRequest($action, "POST", $url, $data);
       echo $results;
@@ -797,7 +797,7 @@ if (isset($_SESSION['username'])) {
       break;
 
     case "renameInstance":
-      $url = $base_url . "/1.0/containers/" . $instance . "?project=" . $project;
+      $url = $base_url . "/1.0/instances/" . $instance . "?project=" . $project;
       $data = '{"name": "' . $name . '"}';
       $results = sendCurlRequest($action, "POST", $url, $data);
       echo $results;
@@ -814,7 +814,7 @@ if (isset($_SESSION['username'])) {
       break;
 
     case "restartInstance":
-      $url = $base_url . "/1.0/containers/" . $instance . "/state?project=" . $project;
+      $url = $base_url . "/1.0/instances/" . $instance . "/state?project=" . $project;
       $data = '{"action": "restart"}';
       $results = sendCurlRequest($action, "PUT", $url, $data);
       echo $results;
@@ -831,7 +831,7 @@ if (isset($_SESSION['username'])) {
       break;
 
     case "restoreInstanceSnapshot":
-      $url = $base_url . "/1.0/containers/" . $instance . "?project=" . $project;
+      $url = $base_url . "/1.0/instances/" . $instance . "?project=" . $project;
       $data = '{"restore":"' . $name . '"}';
       $results = sendCurlRequest($action, "PUT", $url, $data);
       echo $results;
@@ -848,7 +848,7 @@ if (isset($_SESSION['username'])) {
       break;
 
     case "snapshotInstance":
-      $url = $base_url . "/1.0/containers/" . $instance . "/snapshots?project=" . $project;
+      $url = $base_url . "/1.0/instances/" . $instance . "/snapshots?project=" . $project;
       if ($stateful != "true"){
         $stateful = "false";
       }
@@ -869,7 +869,7 @@ if (isset($_SESSION['username'])) {
       break;
 
     case "startInstance":
-      $url = $base_url . "/1.0/containers/" . $instance . "/state?project=" . $project;
+      $url = $base_url . "/1.0/instances/" . $instance . "/state?project=" . $project;
       $data = '{"action": "start"}';
       $results = sendCurlRequest($action, "PUT", $url, $data);
       echo $results;
@@ -886,7 +886,7 @@ if (isset($_SESSION['username'])) {
       break;
 
     case "stopInstance":
-      $url = $base_url . "/1.0/containers/" . $instance . "/state?project=" . $project;
+      $url = $base_url . "/1.0/instances/" . $instance . "/state?project=" . $project;
       $data = '{"action": "stop"}';
       $results = sendCurlRequest($action, "PUT", $url, $data);
       echo $results;
@@ -903,7 +903,7 @@ if (isset($_SESSION['username'])) {
       break;
 
     case "stopInstanceForcefully":
-      $url = $base_url . "/1.0/containers/" . $instance . "/state?project=" . $project;
+      $url = $base_url . "/1.0/instances/" . $instance . "/state?project=" . $project;
       $data = '{"action": "stop","force":true}';
       $results = sendCurlRequest($action, "PUT", $url, $data);
       echo $results;
@@ -920,7 +920,7 @@ if (isset($_SESSION['username'])) {
       break;
 
     case "unfreezeInstance":
-      $url = $base_url . "/1.0/containers/" . $instance . "/state?project=" . $project;
+      $url = $base_url . "/1.0/instances/" . $instance . "/state?project=" . $project;
       $data = '{"action": "unfreeze"}';
       $results = sendCurlRequest($action, "PUT", $url, $data);
       echo $results;
@@ -937,7 +937,7 @@ if (isset($_SESSION['username'])) {
       break;
 
     case "updateInstanceInformation":
-      $url = $base_url . "/1.0/containers/" . $instance . "?project=" . $project;
+      $url = $base_url . "/1.0/instances/" . $instance . "?project=" . $project;
       $data = $json;
       $results = sendCurlRequest($action, "PUT", $url, $data);
       echo $results;
@@ -955,7 +955,7 @@ if (isset($_SESSION['username'])) {
 
     case "updateInstanceUsingForm":
       
-      $url = $base_url . "/1.0/containers/" . $instance . "?project=" . $project;
+      $url = $base_url . "/1.0/instances/" . $instance . "?project=" . $project;
       
       //Retrieve existing instance config settings
       $results = sendCurlRequest($action, "GET", $url);

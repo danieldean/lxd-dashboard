@@ -487,7 +487,7 @@ if (isset($_SESSION['username'])) {
 
     case "listInstances":
       if (validateAuthorization($action)) {
-        $url = $base_url . "/1.0/virtual-machines?recursion=2&project=" . $project;
+        $url = $base_url . "/1.0/instances?recursion=2&project=" . $project;
         $results = sendCurlRequest($action, "GET", $url);
         $results = json_decode($results, true);
         $instance_api_data = (isset($results['metadata'])) ? $results['metadata'] : [];
@@ -638,7 +638,7 @@ if (isset($_SESSION['username'])) {
       break;
 
     case "listInstancesForSelectOption":
-      $url = $base_url . "/1.0/virtual-machines?recursion=1&project=" . $project;
+      $url = $base_url . "/1.0/instances?recursion=1&project=" . $project;
       $results = sendCurlRequest($action, "GET", $url);
       $results = json_decode($results, true);
       $instance_api_data = (isset($results['metadata'])) ? $results['metadata'] : [];

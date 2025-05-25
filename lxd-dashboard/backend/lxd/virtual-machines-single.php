@@ -1300,14 +1300,14 @@ if (isset($_SESSION['username'])) {
       break;
 
     case "retrieveGaugeStats":
-      $url = $base_url . "/1.0/virtual-machines/" . $instance . "/exec?project=" . $project;
+      $url = $base_url . "/1.0/instances/" . $instance . "/exec?project=" . $project;
 
       //Write CPU and memory percentage to a file and retrieve the contents
       $command = "echo $(awk -v a=\\\"$(awk '/cpu /{print $2+$4,$2+$4+$5}' /proc/stat; sleep 1)\\\" '/cpu /{split(a,b, \\\" \\\"); print 100*($2+$4-b[1])/($2+$4+$5-b[2])}'  /proc/stat), $(free | grep Mem | awk '{ print  $3 / $2 * 100 }') > /tmp/lxc_stats";
       $data = '{ "command": ["/bin/sh", "-c", "' . $command . '"], "environment": {}, "wait-for-websocket": false, "record-output": false, "interactive": false, "width": 80, "height": 25, "user": 0, "group": 0, "cwd": "/"}';
       $results = sendCurlRequest($action, "POST", $url, $data);
       
-      $url = $base_url . "/1.0/virtual-machines/" . $instance . "/files?project=" . $project . "&path=/tmp/lxc_stats";
+      $url = $base_url . "/1.0/instances/" . $instance . "/files?project=" . $project . "&path=/tmp/lxc_stats";
       $results = sendCurlRequest($action, "GET", $url);
       
       $results = str_replace( "\n", "", $results);

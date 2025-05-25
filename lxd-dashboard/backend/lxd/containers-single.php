@@ -120,7 +120,7 @@ if (isset($_SESSION['username'])) {
 
   switch ($action) {
     case "addInstanceDiskDevice":
-      $url = $base_url . "/1.0/containers/" . $instance . "?project=" . $project;
+      $url = $base_url . "/1.0/instances/" . $instance . "?project=" . $project;
       $results = sendCurlRequest($action, "GET", $url);
       $data = json_decode($results, true);
       $data = $data['metadata'];
@@ -131,7 +131,7 @@ if (isset($_SESSION['username'])) {
         echo '{"type": "error","error": "Unable to add new device. Device name already exists","error_code": 409,"metadata": {"error": "Unable to add new device. Device name already exists"}}';
       }
       else {
-        $url = $base_url . "/1.0/containers/" . $instance . "?project=" . $project;
+        $url = $base_url . "/1.0/instances/" . $instance . "?project=" . $project;
         $device_array = array();
         $device_array['type'] = "disk";
         $device_array['path'] = $path;
@@ -173,7 +173,7 @@ if (isset($_SESSION['username'])) {
       break;
 
     case "addInstanceGPUDevice":
-      $url = $base_url . "/1.0/containers/" . $instance . "?project=" . $project;
+      $url = $base_url . "/1.0/instances/" . $instance . "?project=" . $project;
       $results = sendCurlRequest($action, "GET", $url);
       $data = json_decode($results, true);
       $data = $data['metadata'];
@@ -184,7 +184,7 @@ if (isset($_SESSION['username'])) {
         echo '{"type": "error","error": "Unable to add new device. Device name already exists","error_code": 409,"metadata": {"error": "Unable to add new device. Device name already exists"}}';
       }
       else {
-        $url = $base_url . "/1.0/containers/" . $instance . "?project=" . $project;
+        $url = $base_url . "/1.0/instances/" . $instance . "?project=" . $project;
         $device_array = array();
         $device_array['type'] = "gpu";
       
@@ -218,7 +218,7 @@ if (isset($_SESSION['username'])) {
       break;
 
     case "addInstanceNetworkDevice":
-      $url = $base_url . "/1.0/containers/" . $instance . "?project=" . $project;
+      $url = $base_url . "/1.0/instances/" . $instance . "?project=" . $project;
       $results = sendCurlRequest($action, "GET", $url);
       $data = json_decode($results, true);
       $data = $data['metadata'];
@@ -229,7 +229,7 @@ if (isset($_SESSION['username'])) {
         echo '{"type": "error","error": "Unable to add new device. Device name already exists","error_code": 409,"metadata": {"error": "Unable to add new device. Device name already exists"}}';
       }
       else {
-        $url = $base_url . "/1.0/containers/" . $instance . "?project=" . $project;
+        $url = $base_url . "/1.0/instances/" . $instance . "?project=" . $project;
         $device_array = array();
         $device_array['type'] = "nic";
 
@@ -418,7 +418,7 @@ if (isset($_SESSION['username'])) {
       break;
     
     case "addInstanceProxyDevice":
-      $url = $base_url . "/1.0/containers/" . $instance . "?project=" . $project;
+      $url = $base_url . "/1.0/instances/" . $instance . "?project=" . $project;
       $results = sendCurlRequest($action, "GET", $url);
       $data = json_decode($results, true);
       $data = $data['metadata'];
@@ -429,7 +429,7 @@ if (isset($_SESSION['username'])) {
         echo '{"type": "error","error": "Unable to add new device. Device name already exists","error_code": 409,"metadata": {"error": "Unable to add new device. Device name already exists"}}';
       }
       else {
-        $url = $base_url . "/1.0/containers/" . $instance . "?project=" . $project;
+        $url = $base_url . "/1.0/instances/" . $instance . "?project=" . $project;
         $device_array = array();
         $device_array['type'] = "proxy";
         $device_array['listen'] = $listen;
@@ -463,7 +463,7 @@ if (isset($_SESSION['username'])) {
       break;
 
     case "addInstanceUnixDevice":
-      $url = $base_url . "/1.0/containers/" . $instance . "?project=" . $project;
+      $url = $base_url . "/1.0/instances/" . $instance . "?project=" . $project;
       $results = sendCurlRequest($action, "GET", $url);
       $data = json_decode($results, true);
       $data = $data['metadata'];
@@ -474,7 +474,7 @@ if (isset($_SESSION['username'])) {
         echo '{"type": "error","error": "Unable to add new device. Device name already exists","error_code": 409,"metadata": {"error": "Unable to add new device. Device name already exists"}}';
       }
       else {
-        $url = $base_url . "/1.0/containers/" . $instance . "?project=" . $project;
+        $url = $base_url . "/1.0/instances/" . $instance . "?project=" . $project;
         $device_array = array();
         $device_array['type'] = $type;
         $device_array['source'] = $source;
@@ -506,7 +506,7 @@ if (isset($_SESSION['username'])) {
       break;
 
     case "addInstanceUSBDevice":
-      $url = $base_url . "/1.0/containers/" . $instance . "?project=" . $project;
+      $url = $base_url . "/1.0/instances/" . $instance . "?project=" . $project;
       $results = sendCurlRequest($action, "GET", $url);
       $data = json_decode($results, true);
       $data = $data['metadata'];
@@ -517,7 +517,7 @@ if (isset($_SESSION['username'])) {
         echo '{"type": "error","error": "Unable to add new device. Device name already exists","error_code": 409,"metadata": {"error": "Unable to add new device. Device name already exists"}}';
       }
       else {
-        $url = $base_url . "/1.0/containers/" . $instance . "?project=" . $project;
+        $url = $base_url . "/1.0/instances/" . $instance . "?project=" . $project;
         $device_array = array();
         $device_array['type'] = "usb";
         $device_array['vendorid'] = $vendorid;
@@ -546,13 +546,13 @@ if (isset($_SESSION['username'])) {
       break;
 
     case "displayInstanceInfo":
-      $url = $base_url . "/1.0/containers/".$instance."?project=" . $project;
+      $url = $base_url . "/1.0/instances/".$instance."?project=" . $project;
       $results = sendCurlRequest($action, "GET", $url);
       echo $results;
       break;
 
     case "displayInstanceStateInfo":
-      $url = $base_url . "/1.0/containers/".$instance."/state?project=" . $project;
+      $url = $base_url . "/1.0/instances/".$instance."/state?project=" . $project;
       $results = sendCurlRequest($action, "GET", $url);
       $results = json_decode($results, true);
       $instance_state = (isset($results['metadata'])) ? $results['metadata'] : [];
@@ -627,7 +627,7 @@ if (isset($_SESSION['username'])) {
       break;
 
     case "establishInstanceWebSocketConsoleConnection":
-      $url = $base_url . "/1.0/containers/".$instance."/console?project=" . $project;
+      $url = $base_url . "/1.0/instances/".$instance."/console?project=" . $project;
       //$data = '{ "command": ["/bin/bash"], "wait-for-websocket": true, "record-output": false, "interactive": true, "width": 80, "height": 25, "user": 0, "group": 0, "cwd": "/~" }';
       $data = '{ "type": "console", "width": 80, "height": 25 }';
       $results = sendCurlRequest($action, "POST", $url, $data);
@@ -648,7 +648,7 @@ if (isset($_SESSION['username'])) {
       break;
 
     case "establishInstanceWebSocketExecConnection":
-      $url = $base_url . "/1.0/containers/".$instance."/exec?project=" . $project;
+      $url = $base_url . "/1.0/instances/".$instance."/exec?project=" . $project;
       if ($shell == "sh"){
         $data = '{ "command": ["/bin/sh"], "wait-for-websocket": true, "environment":{"HOME": "/root", "TERM": "xterm", "USER": "root"}, "interactive": true, "width": 80, "height": 25}';
       }
@@ -673,7 +673,7 @@ if (isset($_SESSION['username'])) {
       break;
       
     case "listInstanceBackups":
-      $url = $base_url . "/1.0/containers/" . $instance . "/backups?recursion=1&project=" . $project;
+      $url = $base_url . "/1.0/instances/" . $instance . "/backups?recursion=1&project=" . $project;
       $results = sendCurlRequest($action, "GET", $url);
       $results = json_decode($results, true);
       $instance_backups = (isset($results['metadata'])) ? $results['metadata'] : [];
@@ -791,13 +791,13 @@ if (isset($_SESSION['username'])) {
       break;
 
     case "listInstanceDiskDevices":
-      $url = $base_url . "/1.0/containers/" . $instance . "/state?project=" . $project;
+      $url = $base_url . "/1.0/instances/" . $instance . "/state?project=" . $project;
       $results = sendCurlRequest($action, "GET", $url);
       $results = json_decode($results, true);
       $disk_names = (isset($results['metadata']['disk'])) ? $results['metadata']['disk'] : [];
 
       //Retrieve Expanded Device information to get a list of disks
-      $url = $base_url . "/1.0/containers/" . $instance . "?project=" . $project;
+      $url = $base_url . "/1.0/instances/" . $instance . "?project=" . $project;
       $results = sendCurlRequest($action, "GET", $url);
       $results = json_decode($results, true);
       $device_names = (isset($results['metadata']['devices'])) ? $results['metadata']['devices'] : [];
@@ -869,7 +869,7 @@ if (isset($_SESSION['username'])) {
       break;
 
     case "listInstanceGPUDevices":
-      $url = $base_url . "/1.0/containers/" . $instance . "?project=" . $project;
+      $url = $base_url . "/1.0/instances/" . $instance . "?project=" . $project;
       $results = sendCurlRequest($action, "GET", $url);
       $results = json_decode($results, true);
       $device_names = (isset($results['metadata']['devices'])) ? $results['metadata']['devices'] : [];
@@ -928,7 +928,7 @@ if (isset($_SESSION['username'])) {
       break;
 
     case "listInstanceInterfaces":
-      $url = $base_url . "/1.0/containers/" . $instance . "/state?recursion=1&project=" . $project;
+      $url = $base_url . "/1.0/instances/" . $instance . "/state?recursion=1&project=" . $project;
       $results = sendCurlRequest($action, "GET", $url);
       $results = json_decode($results, true);
       $networks = (isset($results['metadata']['network'])) ? $results['metadata']['network'] : [];
@@ -994,7 +994,7 @@ if (isset($_SESSION['username'])) {
       break;
 
     case "listInstanceLogs":
-      $url = $base_url . "/1.0/containers/" . $instance . "/logs?project=" . $project;
+      $url = $base_url . "/1.0/instances/" . $instance . "/logs?project=" . $project;
       $results = sendCurlRequest($action, "GET", $url);
       $results = json_decode($results, true);
       $instance_logs = (isset($results['metadata'])) ? $results['metadata'] : [];
@@ -1036,7 +1036,7 @@ if (isset($_SESSION['username'])) {
       break;
 
     case "listInstanceNetworkDevices":
-      $url = $base_url . "/1.0/containers/" . $instance . "?project=" . $project;
+      $url = $base_url . "/1.0/instances/" . $instance . "?project=" . $project;
       $results = sendCurlRequest($action, "GET", $url);
       $results = json_decode($results, true);
       $device_names = (isset($results['metadata']['devices'])) ? $results['metadata']['devices'] : [];
@@ -1089,7 +1089,7 @@ if (isset($_SESSION['username'])) {
       break;
 
     case "listInstanceProfiles":
-      $url = $base_url . "/1.0/containers/" . $instance . "?project=" . $project;
+      $url = $base_url . "/1.0/instances/" . $instance . "?project=" . $project;
       $results = sendCurlRequest($action, "GET", $url);
       $results = json_decode($results, true);
       $profile_names = (isset($results['metadata']['profiles'])) ? $results['metadata']['profiles'] : [];
@@ -1141,7 +1141,7 @@ if (isset($_SESSION['username'])) {
       break;
       
     case "listInstanceProxyDevices":
-      $url = $base_url . "/1.0/containers/" . $instance . "?project=" . $project;
+      $url = $base_url . "/1.0/instances/" . $instance . "?project=" . $project;
       $results = sendCurlRequest($action, "GET", $url);
       $results = json_decode($results, true);
       $device_names = (isset($results['metadata']['devices'])) ? $results['metadata']['devices'] : [];
@@ -1191,7 +1191,7 @@ if (isset($_SESSION['username'])) {
       break;
 
     case "listInstanceSnapshots":
-      $url = $base_url . "/1.0/containers/" . $instance . "/snapshots?recursion=1&project=" . $project;
+      $url = $base_url . "/1.0/instances/" . $instance . "/snapshots?recursion=1&project=" . $project;
       $results = sendCurlRequest($action, "GET", $url);
       $results = json_decode($results, true);
       $snapshots = (isset($results['metadata'])) ? $results['metadata'] : [];
@@ -1269,7 +1269,7 @@ if (isset($_SESSION['username'])) {
       break;
 
     case "listInstanceUnixDevices":
-      $url = $base_url . "/1.0/containers/" . $instance . "?project=" . $project;
+      $url = $base_url . "/1.0/instances/" . $instance . "?project=" . $project;
       $results = sendCurlRequest($action, "GET", $url);
       $results = json_decode($results, true);
       $device_names = (isset($results['metadata']['devices'])) ? $results['metadata']['devices'] : [];
@@ -1327,7 +1327,7 @@ if (isset($_SESSION['username'])) {
       break;
     
     case "listInstanceUSBDevices":
-      $url = $base_url . "/1.0/containers/" . $instance . "?project=" . $project;
+      $url = $base_url . "/1.0/instances/" . $instance . "?project=" . $project;
       $results = sendCurlRequest($action, "GET", $url);
       $results = json_decode($results, true);
       $device_names = (isset($results['metadata']['devices'])) ? $results['metadata']['devices'] : [];
@@ -1383,7 +1383,7 @@ if (isset($_SESSION['username'])) {
       break;
 
     case "removeInstanceDevice":
-      $url = $base_url . "/1.0/containers/" . $instance . "?project=" . $project;
+      $url = $base_url . "/1.0/instances/" . $instance . "?project=" . $project;
       $results = sendCurlRequest($action, "GET", $url);
       $data = json_decode($results, true);
       $data = $data['metadata'];
@@ -1394,7 +1394,7 @@ if (isset($_SESSION['username'])) {
           unset($data['devices']);
         }
         $data = json_encode($data);
-        $url = $base_url . "/1.0/containers/" . $instance . "?project=" . $project;
+        $url = $base_url . "/1.0/instances/" . $instance . "?project=" . $project;
         $results = sendCurlRequest($action, "PUT", $url, $data);
         echo $results;
   
@@ -1412,14 +1412,14 @@ if (isset($_SESSION['username'])) {
       break;
 
     case "retrieveGaugeStats":
-      $url = $base_url . "/1.0/containers/" . $instance . "/exec?project=" . $project;
+      $url = $base_url . "/1.0/instances/" . $instance . "/exec?project=" . $project;
 
       //Write CPU and memory percentage to a file and retrieve the contents
       $command = "echo $(awk -v a=\\\"$(awk '/cpu /{print $2+$4,$2+$4+$5}' /proc/stat; sleep 1)\\\" '/cpu /{split(a,b, \\\" \\\"); print 100*($2+$4-b[1])/($2+$4+$5-b[2])}'  /proc/stat), $(free | grep Mem | awk '{ print  $3 / $2 * 100 }') > /tmp/lxc_stats";
       $data = '{ "command": ["/bin/sh", "-c", "' . $command . '"], "environment": {}, "wait-for-websocket": false, "record-output": false, "interactive": false, "width": 80, "height": 25, "user": 0, "group": 0, "cwd": "/"}';
       $results = sendCurlRequest($action, "POST", $url, $data);
       
-      $url = $base_url . "/1.0/containers/" . $instance . "/files?project=" . $project . "&path=/tmp/lxc_stats";
+      $url = $base_url . "/1.0/instances/" . $instance . "/files?project=" . $project . "&path=/tmp/lxc_stats";
       $results = sendCurlRequest($action, "GET", $url);
      
       $results = str_replace( "\n", "", $results);
@@ -1466,7 +1466,7 @@ if (isset($_SESSION['username'])) {
       break;
 
     case "retrieveInstanceState":
-      $url = $base_url . "/1.0/containers/" . $instance . "/state?project=" . $project;
+      $url = $base_url . "/1.0/instances/" . $instance . "/state?project=" . $project;
       $results = sendCurlRequest($action, "GET", $url);
       echo $results;
       break;
